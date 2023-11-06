@@ -1,8 +1,11 @@
 function elPenjat() {
-    console.log("1. Iniciar un joc \n2. Estadistiques \n3. Sortir")
-    let opcion = parseInt(prompt("Elige una opción"));
-    switch (opcion) {
-        case 1:
+    let partidasJugadas = 0;
+    let partidasGanadas = 0;
+    let partidasPerdidas = 0;
+    while (true) {
+        console.log("1. Iniciar un joc \n2. Estadistiques \n3. Sortir")
+        let opcion = parseInt(prompt("Elige una opción"));
+        if (opcion == 1) {
             let palabra = prompt("Escribe una palabra");
             let arr = Array.from(palabra);
             let str = "_ ".repeat(palabra.length);
@@ -32,17 +35,26 @@ function elPenjat() {
             }
 
             if (!str.includes("_")) {
+                partidasJugadas++;
+                partidasGanadas++;
                 console.log("¡Has ganado! La palabra es: " + palabra);
             } else {
+                partidasJugadas++;
+                partidasPerdidas++;
                 console.log("¡Has perdido! La palabra era: " + palabra);
             }
-
-        case 2:
-
-        case 3:
+        } else if (opcion == 2) {
+            console.log("Total de partidas: " + partidasJugadas);
+            console.log("Partidas Ganadas: " + partidasGanadas);
+            console.log("Partidas Perdidas: " + partidasPerdidas);
+        } else if (opcion == 3) {
             console.log("Juego terminado");
             break;
+        }
+        else{
+            console.log("Valor incorrecto, vuelva a intentarlo");
+        }
     }
-
-    //  alert(str.repeat(longitudString));
 }
+
+//  alert(str.repeat(longitudString));
