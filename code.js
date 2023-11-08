@@ -2,6 +2,7 @@ function elPenjat() {
     let partidasJugadas = 0;
     let partidasGanadas = 0;
     let partidasPerdidas = 0;
+    let letrasFalladas = [];
     while (true) {
         console.log("1. Iniciar un joc \n2. Estadistiques \n3. Sortir")
         let opcion = parseInt(prompt("Elige una opción"));
@@ -27,7 +28,8 @@ function elPenjat() {
 
                     if (!encontrada) {
                         intentos--;
-                        console.log("Incorrecto. Te quedan " + intentos + " intentos.");
+                        letrasFalladas.push(letra);
+                        console.log("Letras falladas " + intentos + "/6: " + letrasFalladas.join(", "));
                     }
                 } else {
                     console.log("Entrada incorrecta. Introduce una sola letra.");
@@ -45,16 +47,14 @@ function elPenjat() {
             }
         } else if (opcion == 2) {
             console.log("Total de partidas: " + partidasJugadas);
-            console.log("Partidas Ganadas: " + partidasGanadas);
-            console.log("Partidas Perdidas: " + partidasPerdidas);
+            console.log("Partidas Ganadas: (" + ((partidasGanadas*100)/partidasJugadas) + "%): " + partidasGanadas);
+            console.log("Partidas Perdidas: (" + ((partidasPerdidas*100)/partidasJugadas) + "%): " + partidasPerdidas);
         } else if (opcion == 3) {
             console.log("Juego terminado");
             break;
         }
-        else{
+        else {
             console.log("Valor incorrecto, vuelva a intentarlo");
         }
     }
 }
-
-//  alert(str.repeat(longitudString));
