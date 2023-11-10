@@ -9,6 +9,16 @@ let span = document.createElement("span");
 span.textContent = "-";
 jocPenjatDiv.appendChild(span);
 
+const abecedario = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+let abecedariDiv = document.getElementById("abecedari");
+let bloqueAbecedari = "";
+for (let i = 0; i < abecedario.length; i++) {
+    bloqueAbecedari += '<button class="btn btn-light m-2" style="border-radius: 5px; border: 1px solid black; border-color: gray; color: gray;">' + abecedario[i] + '</button>';
+}
+abecedariDiv.innerHTML = bloqueAbecedari;
+
+
+
 function novaPartida() {
     let palabra = prompt("Escribe una palabra");
     let arr = Array.from(palabra);
