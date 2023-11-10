@@ -1,48 +1,57 @@
-function elPenjat() {
-    console.log("1. Iniciar un joc \n2. Estadistiques \n3. Sortir")
-    let opcion = parseInt(prompt("Elige una opción"));
-    switch (opcion) {
-        case 1:
-            let palabra = prompt("Escribe una palabra");
-            let arr = Array.from(palabra);
-            let str = "_ ".repeat(palabra.length);
-            let intentos = 6;
 
-            while (intentos > 0 && str.includes("_")) {
-                console.log(str);
-                let letra = prompt("Escribe una letra");
+let partidasJugadas = 0;
+let partidasGanadas = 0;
+let partidasPerdidas = 0;
+let letrasFalladas = [];
+const imagen = document.getElementById("imatgePenjat");
+const jocPenjatDiv = document.getElementById("jocPenjat");
+let span = document.createElement("span");
+span.textContent = "-";
+jocPenjatDiv.appendChild(span);
 
-                if (letra.length < 2 && letra.match(/[a-zA-Z]/)) {
-                    let encontrada = false;
+function novaPartida() {
+    let palabra = prompt("Escribe una palabra");
+    let arr = Array.from(palabra);
+    let str = "_ ".repeat(palabra.length);
+    let intentos = 6;
 
-                    for (let x = 0; x < arr.length; x++) {
-                        if (arr[x] === letra) {
-                            str = str.substring(0, 2 * x) + letra + str.substring(2 * x + 1);
-                            encontrada = true;
-                        }
-                    }
+    while (intentos > 0 && str.includes("_")) {
+        console.log(str);
+        let letra = prompt("Escribe una letra");
 
-                    if (!encontrada) {
-                        intentos--;
-                        console.log("Incorrecto. Te quedan " + intentos + " intentos.");
-                    }
-                } else {
-                    console.log("Entrada incorrecta. Introduce una sola letra.");
+        if (letra.length < 2 && letra.match(/[a-zA-Z]/)) {
+            let encontrada = false;
+
+            for (let x = 0; x < arr.length; x++) {
+                if (arr[x] === letra) {
+                    str = str.substring(0, 2 * x) + letra + str.substring(2 * x + 1);
+                    encontrada = true;
                 }
             }
 
-            if (!str.includes("_")) {
-                console.log("¡Has ganado! La palabra es: " + palabra);
-            } else {
-                console.log("¡Has perdido! La palabra era: " + palabra);
+            if (!encontrada) {
+                intentos--;
+                letrasFalladas.push(letra);
+                console.log("Letras falladas " + intentos + "/6: " + letrasFalladas.join(", "));
             }
-
-        case 2:
-
-        case 3:
-            console.log("Juego terminado");
-            break;
+        } else {
+            console.log("Entrada incorrecta. Introduce una sola letra.");
+        }
     }
 
-    //  alert(str.repeat(longitudString));
+    if (!str.includes("_")) {
+        partidasJugadas++;
+        partidasGanadas++;
+        console.log("¡Has ganado! La palabra es: " + palabra);
+    } else {
+        partidasJugadas++;
+        partidasPerdidas++;
+        console.log("¡Has perdido! La palabra era: " + palabra);
+    }
+}
+
+function estadisticas() {
+    console.log("Total de partidas: " + partidasJugadas);
+    console.log("Partidas Ganadas: (" + ((partidasGanadas * 100) / partidasJugadas) + "%): " + partidasGanadas);
+    console.log("Partidas Perdidas: (" + ((partidasPerdidas * 100) / partidasJugadas) + "%): " + partidasPerdidas);
 }
