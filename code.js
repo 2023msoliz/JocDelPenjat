@@ -3,17 +3,16 @@ let partidasJugadas = 0;
 let partidasGanadas = 0;
 let partidasPerdidas = 0;
 let letrasFalladas = [];
-const imagen = document.getElementById("imatgePenjat");
-const jocPenjatDiv = document.getElementById("jocPenjat");
-let span = document.createElement("span");
-span.textContent = "-";
-jocPenjatDiv.appendChild(span);
+
+let letrasUtilizadasDiv = document.getElementById("lletresUtilitzades");
+let letrasUtilizadas = [];
 
 const abecedario = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 let abecedariDiv = document.getElementById("abecedari");
 let bloqueAbecedari = "";
 for (let i = 0; i < abecedario.length; i++) {
-    bloqueAbecedari += '<button class="btn btn-light m-2" style="border-radius: 5px; border: 1px solid black; border-color: gray; color: gray;">' + abecedario[i] + '</button>';
+    let letra = abecedario[i];
+    bloqueAbecedari += `<button id="${letra}" onclick="comprobarLetra('${letra}')" class="btn btn-light m-2" style="border-radius: 5px; border: 1px solid black; border-color: gray; color: gray;">${abecedario[i]}</button>`;
 }
 abecedariDiv.innerHTML = bloqueAbecedari;
 
@@ -27,8 +26,6 @@ function novaPartida() {
 
     while (intentos > 0 && str.includes("_")) {
         console.log(str);
-        let letra = prompt("Escribe una letra");
-
         if (letra.length < 2 && letra.match(/[a-zA-Z]/)) {
             let encontrada = false;
 
